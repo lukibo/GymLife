@@ -23,8 +23,8 @@ import { authClient } from '@/lib/auth/client';
 import { useUser } from '@/hooks/use-user';
 
 const schema = zod.object({
-  email: zod.string().min(1, { message: 'Email is required' }).email(),
-  password: zod.string().min(1, { message: 'Password is required' }),
+  email: zod.string().min(1, { message: 'E-mail is vereist' }).email(),
+  password: zod.string().min(1, { message: 'Wachtwoord is vereist' }),
 });
 
 type Values = zod.infer<typeof schema>;
