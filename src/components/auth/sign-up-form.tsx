@@ -23,11 +23,11 @@ import { authClient } from '@/lib/auth/client';
 import { useUser } from '@/hooks/use-user';
 
 const schema = zod.object({
-  firstName: zod.string().min(1, { message: 'First name is required' }),
-  lastName: zod.string().min(1, { message: 'Last name is required' }),
-  email: zod.string().min(1, { message: 'Email is required' }).email(),
-  password: zod.string().min(6, { message: 'Password should be at least 6 characters' }),
-  terms: zod.boolean().refine((value) => value, 'You must accept the terms and conditions'),
+  firstName: zod.string().min(1, { message: 'Voornaam is vereist' }),
+  lastName: zod.string().min(1, { message: 'Achternaam is vereist' }),
+  email: zod.string().min(1, { message: 'E-mail is vereist' }).email(),
+  password: zod.string().min(6, { message: 'Wachtwoord moet minimaal 6 karakters lang zijn' }),
+  terms: zod.boolean().refine((value) => value, 'Je moet de termen en voorwaarden accepteren'),
 });
 
 type Values = zod.infer<typeof schema>;
@@ -73,11 +73,11 @@ export function SignUpForm(): React.JSX.Element {
   return (
     <Stack spacing={3}>
       <Stack spacing={1}>
-        <Typography variant="h4">Sign up</Typography>
+        <Typography variant="h4">Registreren</Typography>
         <Typography color="text.secondary" variant="body2">
-          Already have an account?{' '}
+          Heeft u al een account?{' '}
           <Link component={RouterLink} href={paths.auth.signIn} underline="hover" variant="subtitle2">
-            Sign in
+            Log in
           </Link>
         </Typography>
       </Stack>
@@ -88,8 +88,8 @@ export function SignUpForm(): React.JSX.Element {
             name="firstName"
             render={({ field }) => (
               <FormControl error={Boolean(errors.firstName)}>
-                <InputLabel>First name</InputLabel>
-                <OutlinedInput {...field} label="First name" />
+                <InputLabel>Voornaam</InputLabel>
+                <OutlinedInput {...field} label="First name" sx={{ backgroundColor: 'white' }} />
                 {errors.firstName ? <FormHelperText>{errors.firstName.message}</FormHelperText> : null}
               </FormControl>
             )}
@@ -99,9 +99,9 @@ export function SignUpForm(): React.JSX.Element {
             name="lastName"
             render={({ field }) => (
               <FormControl error={Boolean(errors.firstName)}>
-                <InputLabel>Last name</InputLabel>
-                <OutlinedInput {...field} label="Last name" />
-                {errors.firstName ? <FormHelperText>{errors.firstName.message}</FormHelperText> : null}
+                <InputLabel>Achternaam</InputLabel>
+                <OutlinedInput {...field} label="Last name" sx={{ backgroundColor: 'white' }} />
+                {errors.lastName ? <FormHelperText>{errors.lastName.message}</FormHelperText> : null}
               </FormControl>
             )}
           />
@@ -110,8 +110,8 @@ export function SignUpForm(): React.JSX.Element {
             name="email"
             render={({ field }) => (
               <FormControl error={Boolean(errors.email)}>
-                <InputLabel>Email address</InputLabel>
-                <OutlinedInput {...field} label="Email address" type="email" />
+                <InputLabel>E-mail</InputLabel>
+                <OutlinedInput {...field} label="Email address" type="email" sx={{ backgroundColor: 'white' }} />
                 {errors.email ? <FormHelperText>{errors.email.message}</FormHelperText> : null}
               </FormControl>
             )}
@@ -121,8 +121,8 @@ export function SignUpForm(): React.JSX.Element {
             name="password"
             render={({ field }) => (
               <FormControl error={Boolean(errors.password)}>
-                <InputLabel>Password</InputLabel>
-                <OutlinedInput {...field} label="Password" type="password" />
+                <InputLabel>Wachtwoord</InputLabel>
+                <OutlinedInput {...field} label="Password" type="password" sx={{ backgroundColor: 'white' }} />
                 {errors.password ? <FormHelperText>{errors.password.message}</FormHelperText> : null}
               </FormControl>
             )}
@@ -136,7 +136,7 @@ export function SignUpForm(): React.JSX.Element {
                   control={<Checkbox {...field} />}
                   label={
                     <React.Fragment>
-                      I have read the <Link>terms and conditions</Link>
+                      Ik heb de <Link>termen en voorwaarden</Link> gelezen
                     </React.Fragment>
                   }
                 />
@@ -146,11 +146,10 @@ export function SignUpForm(): React.JSX.Element {
           />
           {errors.root ? <Alert color="error">{errors.root.message}</Alert> : null}
           <Button disabled={isPending} type="submit" variant="contained">
-            Sign up
+            Registreren
           </Button>
         </Stack>
       </form>
-      <Alert color="warning">Created users are not persisted</Alert>
     </Stack>
   );
 }
