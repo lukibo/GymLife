@@ -1,10 +1,9 @@
 import * as React from 'react';
 import RouterLink from 'next/link';
 import Box from '@mui/material/Box';
-
+import Typography from "@mui/material/Typography";
 import { paths } from '@/paths';
 import { DynamicLogo } from '@/components/core/logo';
-import Typography from "@mui/material/Typography";
 
 export interface LayoutProps {
   children: React.ReactNode;
@@ -17,7 +16,8 @@ export function Layout({ children }: LayoutProps): React.JSX.Element {
         display: { xs: 'flex', lg: 'grid' },
         flexDirection: { xs: 'column', lg: 'row' },
         gridTemplateColumns: { lg: '1fr 2fr' },
-        minHeight: '100%',
+        minHeight: '100vh',
+        overflow: 'hidden',
         backgroundColor: 'rgba(228, 228, 228, 1)'
       }}
     >
@@ -36,8 +36,8 @@ export function Layout({ children }: LayoutProps): React.JSX.Element {
         <Box
           component="img"
           alt="Gym"
-          src="/assets/gym.webp"
-          sx={{ height: 'auto', width: '100%', maxHeight: '100%' }}
+          src="/assets/gym.png"
+          sx={{ width: '100%', height: '100vh', objectFit: 'cover' }} // Adjusted to cover the full viewport height
         />
       </Box>
     </Box>
